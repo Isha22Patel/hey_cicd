@@ -12,4 +12,7 @@ jobs:
         run: date
 
       - name: Show operating system
-        run: uname -a  
+        run: uname -a
+
+      - name: show myself
+        run: echo "i am ${USER}"
