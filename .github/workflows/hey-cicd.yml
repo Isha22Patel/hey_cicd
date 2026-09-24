@@ -1,4 +1,4 @@
-name: Hello Github Actions
+name: Hello GitHub Actions
 on:
   workflow_dispatch:
 jobs:
@@ -7,27 +7,31 @@ jobs:
     steps:
       - name: Print message
         run: echo "Hello from GitHub Actions!"
-
       - name: Show date
         run: date
-
       - name: Show operating system
         run: uname -a
-
-      - name: show myself
-        run: echo "i am $(whoami)"
-
-    greet:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Print message
-        run: echo "Greet from GitHub Actions!"
-
+        run: echo "Hello from GitHub Actions!"
       - name: Show date
         run: date
-
       - name: Show operating system
         run: uname -a
 
-      - name: show myself
-        run: echo "i am $(whoami)"      
+  secrets-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secret
+        env:
+          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
+        run: |
+          if [ -n "$DEMO_SECRET" ]; then
+            echo "Secret is available."
+          else
+            echo "Secret is not configured."
+            exit 1
+          fi
+
